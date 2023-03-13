@@ -16,8 +16,7 @@ def request_count(func: Callable) -> Callable:
         redis_client = redis.Redis()
         url = args[0]
         key = f"count:{url}"
-        redis_client.set(key, 0, ex=0)
-        # print(key)
+        redis_client.set(key, 0, ex=10)
         return func(*args, **kwargs)
     return wrapper
 
@@ -32,3 +31,5 @@ def get_page(url: str) -> str:
 
 if __name__ == '__main__':
     print(get_page('https://httpbin.org/anything'))
+    print(get_page('http://slowwly.robertomurray.co.uk'))
+    print(get_page('http://google.com'))
