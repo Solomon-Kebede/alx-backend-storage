@@ -15,11 +15,9 @@ def request_count(func: Callable) -> Callable:
     def wrapper(*args, **kwargs):
         redis_client = redis.Redis()
         url = args[0]
-        key = f'count:{url}'
-        if redis_client.get(key) is None:
-            redis_client.expire(key, 10)
-        redis_client.incr(key)
-        print(key)
+        key = f"count:{url}"
+        redis_client.set(key, 0, ex=0)
+        # print(key)
         return func(*args, **kwargs)
     return wrapper
 
