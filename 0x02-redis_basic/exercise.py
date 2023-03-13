@@ -19,6 +19,7 @@ def count_calls(method: Callable) -> Callable:
         return output
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(*args, **kwargs):
@@ -32,7 +33,10 @@ def call_history(method: Callable) -> Callable:
         return output
     return wrapper
 
+
 def replay(method: Callable) -> None:
+    '''Display the history of calls of a
+    particular function'''
     key_base = method.__qualname__
     r = redis.Redis()
     inputs = r.lrange(f"{key_base}:inputs", 0, -1)
