@@ -10,6 +10,7 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
+    '''Wrapper that counts the number of calls of a certain method'''
     @wraps(method)
     def wrapper(*args, **kwargs):
         key = method.__qualname__
@@ -21,6 +22,7 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
+    '''Wrapper that saves function call history a certain method'''
     @wraps(method)
     def wrapper(*args, **kwargs):
         key_base = method.__qualname__
