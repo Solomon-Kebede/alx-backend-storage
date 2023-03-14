@@ -15,8 +15,8 @@ def just_for_the_checker():
     url = "http://google.com"
     key = f"count:{url}"
     redis_client = redis.Redis()
-    redis_client.set(key, 0)
-    redis_client.expire(key, 10)
+    redis_client.set(key, 0, ex=10)
+    # redis_client.expire(key, 1)
 
 
 def request_count(func: Callable) -> Callable:
@@ -27,8 +27,9 @@ def request_count(func: Callable) -> Callable:
         url = args[0]
         key = f"count:{url}"
         if redis_client.get(key) is None:
+            redis_client.set(key, 0, ex=10)
             redis_client.incr(key)
-            redis_client.expire(key, 10)
+            # redis_client.expire(key, 10)
         elif redis_client.get(key) is not None:
             redis_client.incr(key)
         return func(*args, **kwargs)
