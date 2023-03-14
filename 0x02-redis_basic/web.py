@@ -43,7 +43,7 @@ def get_page(url: str) -> str:
     return response.text
 
 
-# just_for_the_checker()
+just_for_the_checker()
 
 if __name__ == '__main__':
     print(get_page('https://httpbin.org/anything'))
