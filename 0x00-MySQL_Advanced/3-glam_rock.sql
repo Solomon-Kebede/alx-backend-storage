@@ -5,4 +5,4 @@
 -- 	You should use attributes `formed` and `split` for computing the `lifespan`
 -- 	Your script can be executed on any database
 
-SELECT band_name, COALESCE(split, YEAR(CURDATE())) - formed AS lifespan FROM metal_bands WHERE style LIKE '%Glam rock%';
+SELECT band_name, COALESCE(split, YEAR(GETDATE())) - formed AS lifespan FROM metal_bands WHERE style LIKE '%Glam rock%';	
