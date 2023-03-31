@@ -13,6 +13,9 @@
 -- END //
 -- DELIMETER ;
 
+
+-- https://dev.mysql.com/doc/refman/5.7/en/trigger-syntax.html
+
 DELIMITER //
 
 CREATE TRIGGER reset_email
